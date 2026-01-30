@@ -15,11 +15,12 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#gallery", label: "Gallery" },
-    { href: "#features", label: "Features" },
-    { href: "#location", label: "Location" },
-  ];
+  { id: "about", label: "About" },
+  { id: "gallery", label: "Gallery" },
+  { id: "features", label: "Features" },
+  { id: "location", label: "Location" },
+];
+
 
   return (
     <header
