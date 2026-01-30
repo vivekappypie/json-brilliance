@@ -14,6 +14,13 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (id: string) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  setIsMobileMenuOpen(false);
+};
+
+
   const navLinks = [
   { id: "about", label: "About" },
   { id: "gallery", label: "Gallery" },
