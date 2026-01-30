@@ -15,10 +15,6 @@ const Header = () => {
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    // optional: update the URL hash without changing routes
-    window.history.replaceState(null, "", `#${id}`);
-
     setIsMobileMenuOpen(false);
   };
 
@@ -42,7 +38,6 @@ const Header = () => {
           type="button"
           onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
-            window.history.replaceState(null, "", "#");
             setIsMobileMenuOpen(false);
           }}
           className="flex items-center gap-3 group"
