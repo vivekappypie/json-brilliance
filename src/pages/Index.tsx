@@ -10,13 +10,31 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
+
       <main>
-        <Hero />
-        <About />
-        <Gallery />
-        <Features />
-        <Location />
+        {/* ✅ Top anchor (logo scroll target) */}
+        <section id="top">
+          <Hero />
+        </section>
+
+        {/* ✅ Navigation scroll targets */}
+        <section id="about">
+          <About />
+        </section>
+
+        <section id="gallery">
+          <Gallery />
+        </section>
+
+        <section id="features">
+          <Features />
+        </section>
+
+        <section id="location">
+          <Location />
+        </section>
       </main>
+
       <Footer />
     </div>
   );
