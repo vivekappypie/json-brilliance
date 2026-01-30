@@ -1,87 +1,122 @@
-import { ArrowDown, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowDown, Sparkles } from "lucide-react";
 import { businessData } from "@/data/businessData";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero">
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-dark texture-overlay">
+      {/* Ambient glow effects */}
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[150px] animate-pulse-glow" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-highlight/5 rounded-full blur-[120px] animate-pulse-glow" style={{ animationDelay: "2s" }} />
       
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-pulse-soft" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1.5s" }} />
-      
-      {/* Grid pattern overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(hsl(var(--primary-foreground)) 1px, transparent 1px),
-                           linear-gradient(90deg, hsl(var(--primary-foreground)) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px"
-        }}
-      />
+      {/* Decorative gold lines */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent via-accent/50 to-transparent" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-t from-transparent via-accent/50 to-transparent" />
+
+      {/* Corner accents */}
+      <div className="absolute top-8 left-8 w-24 h-24 border-l border-t border-accent/30" />
+      <div className="absolute top-8 right-8 w-24 h-24 border-r border-t border-accent/30" />
+      <div className="absolute bottom-8 left-8 w-24 h-24 border-l border-b border-accent/30" />
+      <div className="absolute bottom-8 right-8 w-24 h-24 border-r border-b border-accent/30" />
 
       <div className="relative container mx-auto px-6 py-32 text-center">
+        {/* Exclusive badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-10"
+        >
+          <span className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-accent/30 bg-card/50 backdrop-blur-sm text-accent text-sm font-medium tracking-widest uppercase">
+            <Sparkles size={14} className="animate-pulse" />
+            Silicon Valley Landmark
+            <Sparkles size={14} className="animate-pulse" />
+          </span>
+        </motion.div>
+
         {/* Logo */}
-        <div className="mb-8 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-primary-foreground/10 backdrop-blur-sm p-4 shadow-glow animate-float">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="mb-10"
+        >
+          <div className="inline-flex items-center justify-center w-32 h-32 rounded-full border border-accent/20 bg-card/30 backdrop-blur-sm p-5 shadow-luxury animate-float">
             <img
               src={businessData.logo}
               alt={businessData.name}
               className="w-full h-full object-contain"
             />
           </div>
-        </div>
-
-        {/* Location badge */}
-        <div className="mb-6 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground/90 text-sm font-medium">
-            <MapPin size={14} className="text-accent" />
-            Mountain View, CA
-          </span>
-        </div>
+        </motion.div>
 
         {/* Main heading */}
-        <h1 
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-6 leading-tight animate-fade-up"
-          style={{ animationDelay: "0.3s" }}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-medium text-foreground mb-8 leading-none tracking-tight"
         >
-          {businessData.name}
-        </h1>
+          <span className="block">Where</span>
+          <span className="block text-gradient-gold italic">Innovation</span>
+          <span className="block">Lives</span>
+        </motion.h1>
 
         {/* Tagline */}
-        <p 
-          className="text-xl md:text-2xl text-primary-foreground/70 max-w-2xl mx-auto mb-8 animate-fade-up"
-          style={{ animationDelay: "0.4s" }}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="font-sans text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 font-light tracking-wide"
         >
           {businessData.tagline}
-        </p>
+        </motion.p>
+
+        {/* Decorative divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="w-24 h-px bg-gradient-gold mx-auto mb-6"
+        />
 
         {/* Description */}
-        <p 
-          className="text-primary-foreground/60 max-w-xl mx-auto mb-12 leading-relaxed animate-fade-up"
-          style={{ animationDelay: "0.5s" }}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="text-muted-foreground/70 max-w-lg mx-auto mb-14 leading-relaxed text-sm tracking-wide"
         >
           {businessData.description}
-        </p>
+        </motion.p>
 
         {/* CTA Button */}
-        <div className="animate-fade-up" style={{ animationDelay: "0.6s" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+        >
           <a
             href="#about"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-accent hover:bg-accent/90 text-accent-foreground rounded-full font-semibold text-lg transition-all duration-300 shadow-glow hover:shadow-xl hover:scale-105"
+            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-gold text-accent-foreground font-semibold text-sm tracking-widest uppercase overflow-hidden transition-all duration-500 hover:shadow-gold shine-effect"
           >
-            {businessData.ctaText}
-            <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform" />
+            <span className="relative z-10">{businessData.ctaText}</span>
+            <ArrowDown size={16} className="relative z-10 group-hover:translate-y-1 transition-transform" />
           </a>
-        </div>
+        </motion.div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 rounded-full border-2 border-primary-foreground/30 flex justify-center pt-2">
-            <div className="w-1.5 h-3 bg-primary-foreground/50 rounded-full animate-pulse" />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 2 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        >
+          <div className="flex flex-col items-center gap-3">
+            <span className="text-muted-foreground/50 text-xs tracking-[0.3em] uppercase">Scroll</span>
+            <div className="w-px h-12 bg-gradient-to-b from-accent/50 to-transparent" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
