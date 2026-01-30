@@ -14,20 +14,22 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ✅ Smooth scroll function (fixes GitHub Pages 404 issue)
   const scrollToSection = (id: string) => {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  setIsMobileMenuOpen(false);
-};
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setIsMobileMenuOpen(false);
+  };
 
-
+  // ✅ Navigation links now use section IDs instead of href
   const navLinks = [
-  { id: "about", label: "About" },
-  { id: "gallery", label: "Gallery" },
-  { id: "features", label: "Features" },
-  { id: "location", label: "Location" },
-];
-
+    { id: "about", label: "About" },
+    { id: "gallery", label: "Gallery" },
+    { id: "features", label: "Features" },
+    { id: "location", label: "Location" },
+  ];
 
   return (
     <header
@@ -38,7 +40,11 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3 group">
+        {/* Logo */}
+        <button
+          onClick={() => scrollToSection("top")}
+          className="flex items-center gap-3 group"
+        >
           <div className="w-10 h-10 rounded-xl bg-primary/10 p-1.5 transition-transform duration-300 group-hover:scale-110">
             <img
               src={businessData.logo}
@@ -53,14 +59,14 @@ const Header = () => {
           >
             {businessData.name}
           </span>
-        </a>
+        </button>
 
-        {/* Desktop Navigation */}
+        {/* ✅ Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <button
+              key={link.id}
+              onClick={() => scrollToSection(link.id)}
               className={`text-sm font-medium transition-all duration-300 hover:text-accent relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:transition-all after:duration-300 hover:after:w-full ${
                 isScrolled
                   ? "text-muted-foreground"
@@ -68,7 +74,7 @@ const Header = () => {
               }`}
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
 
@@ -85,7 +91,7 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ✅ Mobile Menu */}
       <div
         className={`md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl shadow-lg transition-all duration-300 overflow-hidden ${
           isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
@@ -93,14 +99,13 @@ const Header = () => {
       >
         <nav className="flex flex-col p-6 gap-4">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-foreground/80 hover:text-accent transition-colors text-lg font-medium"
+            <button
+              key={link.id}
+              onClick={() => scrollToSection(link.id)}
+              className="text-foreground/80 hover:text-accent transition-colors text-lg font-medium text-left"
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
       </div>
