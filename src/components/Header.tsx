@@ -15,6 +15,10 @@ const Header = () => {
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // optional: update the URL hash without changing routes
+    window.history.replaceState(null, "", `#${id}`);
+
     setIsMobileMenuOpen(false);
   };
 
@@ -34,11 +38,11 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
+        <button
+          type="button"
+          onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
+            window.history.replaceState(null, "", "#");
             setIsMobileMenuOpen(false);
           }}
           className="flex items-center gap-3 group"
@@ -57,18 +61,15 @@ const Header = () => {
           >
             {businessData.name}
           </span>
-        </a>
+        </button>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.id}
-              href={`#${link.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection(link.id);
-              }}
+              type="button"
+              onClick={() => scrollToSection(link.id)}
               className={`text-sm font-medium transition-all duration-300 hover:text-accent relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:transition-all after:duration-300 hover:after:w-full ${
                 isScrolled
                   ? "text-muted-foreground"
@@ -76,12 +77,13 @@ const Header = () => {
               }`}
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
 
         {/* Mobile Menu Button */}
         <button
+          type="button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className={`md:hidden p-2 rounded-lg transition-colors ${
             isScrolled
@@ -101,17 +103,14 @@ const Header = () => {
       >
         <nav className="flex flex-col p-6 gap-4">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.id}
-              href={`#${link.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection(link.id);
-              }}
-              className="text-foreground/80 hover:text-accent transition-colors text-lg font-medium"
+              type="button"
+              onClick={() => scrollToSection(link.id)}
+              className="text-left text-foreground/80 hover:text-accent transition-colors text-lg font-medium"
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </nav>
       </div>
