@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { businessData } from "@/data/businessData";
 
@@ -34,6 +34,7 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
+        {/* Logo: scroll to top */}
         <button
           type="button"
           onClick={() => {
